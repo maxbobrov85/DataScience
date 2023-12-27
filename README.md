@@ -148,8 +148,7 @@ $\bar{{\mathsf{c}}}^m_t$
 ```
 Далее получаем обновленный запрос последовательности для $m^{\mathrm{th}}$ head взвешенной суммой векторов значений обзора
 ```math
-    {\mathsf{q}}^{\mathrm{s},m}_t
-&=
+    {\mathsf{q}}^{\mathrm{s},m}_t =
     \sum_{n=1}^N
     \mathrm{softmax} (\bar{{\mathsf{c}}}^m_{t})_{n}
     \cdot
@@ -167,8 +166,7 @@ ${\mathsf{W}}^{{\mathsf{q}}}
 обновленный совмещенный вектор 
 ${\mathsf{c}}_t$ ($\lvert {\mathsf{c}}_t \rvert=N$) 
 вычисляется как
-$$
-
+```math
     {\mathsf{c}}_{t,n}
 =
     \begin{cases}
@@ -181,15 +179,13 @@ $$
              }
              {\sqrt{d}} 
         \Big)
-& 
         \text{if} \hspace{2pt} n\notin \{s_{1:t-1}\},
 \\
         -\infty 
-& 
         \text{иначе},
     \end{cases}
 
-$$
+```
 где логиты ограничены значениями между
 $[-C,C]$ следуя
 [Kool, W., van Hoof, H., and Welling, M. Attention, learn to solve routing problems!](https://arxiv.org/abs/1803.08475)
