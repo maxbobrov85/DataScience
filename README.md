@@ -217,18 +217,7 @@ $[-C,C]$ следуя
 ```
 оптимизируемая следующей $\mathrm{REINFORCE}$ градиентной оценкой 
 ```math
-    \nabla_{{\theta}}
-    \mathcal{J}({\theta} \vert \mathcal{I})
-=
-    \mathbb{E}_{\mathcal{C}_{\pi}\sim\pi_{{\theta}}}
-    \Big[
-        \Big(
-            c(\mathcal{C}_{\pi} \vert \mathcal{I})
-            - 
-            b(\mathcal{I})
-        \Big)
-    \cdot
-\notag
+\nabla_{{\theta}} \mathcal{J}({\theta} \vert \mathcal{I}) =\mathbb{E}_{\mathcal{C}_{\pi}\sim\pi_{{\theta}}}\Big[\Big( c(\mathcal{C}_{\pi} \vert \mathcal{I})- b(\mathcal{I})\Big)\cdot\notag
 ```
 ```math
     \sum_{t=1}^{N}
