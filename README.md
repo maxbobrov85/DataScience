@@ -27,13 +27,13 @@
 Представление коробок в наборе. В начале каждого эпизода размерности каждого ящика на входе сперва преобразуются с помощью линейного слоя:
 ```math
 \begin{align}
-\bar{\bm{\mathsf{b}}}^n=\mathrm{Linear} (l^n,w^n,h^n)
+\bar{{\mathsf{b}}}^n=\mathrm{Linear} (l^n,w^n,h^n)
 \end{align}
 ```
 ### Класс Encoder (состоит из EncoderMultiHeadAttention (2) и FeedForward(3))
 Множество из $N$ таких размещений $\bar{{\mathsf{b}}}$
 ($\lvert \bar{{\mathsf{b}}} \rvert=d$) затем проходит через несколько  multi-head (с $M$ heads) self-attention слоев , каждый из которых содержит следующие операции.
-$$
+```math
     \tilde{{\mathsf{b}}}^n
 &=
     \bar{{\mathsf{b}}}^n
@@ -57,7 +57,7 @@ $$
         \tilde{{\mathsf{b}}}^n
     \big)
     \big).
-$$
+```
 где $\mathrm{MHA}$ обозначает multi-head attention слой , $\mathrm{LN}$ обозначает слой нормализации , а $\mathrm{MLP}$ обозначает полносвязный слой с функцией активации $\mathrm{ReLU}$. 
 
 ### Класс FrontierEmbbeding
