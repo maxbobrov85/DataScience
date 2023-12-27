@@ -25,11 +25,11 @@
 Базово реализуем алгоритм предложенные в статье [Jingwei Zhang, Bin Zi, Xiaoyu Ge, Attend2Pack: Bin Packing through Deep Reinforcement Learning with Attention](https://arxiv.org/abs/2107.04333)
 ### Класс Embedding 
 Представление коробок в наборе. В начале каждого эпизода размерности каждого ящика на входе сперва преобразуются с помощью линейного слоя:
-$$
+```math
 \begin{align}
 \bar{\bm{\mathsf{b}}}^n=\mathrm{Linear} (l^n,w^n,h^n)
 \end{align}
-$$
+```
 ### Класс Encoder (состоит из EncoderMultiHeadAttention (2) и FeedForward(3))
 Множество из $N$ таких размещений $\bar{\bm{\mathsf{b}}}$
 ($\lvert \bar{\bm{\mathsf{b}}} \rvert=d$) затем проходит через несколько  multi-head (с $M$ heads) self-attention слоев , каждый из которых содержит следующие операции.
