@@ -34,29 +34,8 @@
 Множество из $N$ таких размещений $\bar{{\mathsf{b}}}$
 ($\lvert \bar{{\mathsf{b}}} \rvert=d$) затем проходит через несколько  multi-head (с $M$ heads) self-attention слоев , каждый из которых содержит следующие операции.
 ```math
-    \tilde{{\mathsf{b}}}^n
-&=
-    \bar{{\mathsf{b}}}^n
-+ 
-    \mathrm{MHA}\big(
-    \mathrm{LN}\big(
-            \bar{{\mathsf{b}}}^1,
-            \bar{{\mathsf{b}}}^2,
-            \ldots,
-            \bar{{\mathsf{b}}}^N
-    \big)
-    \big),
-
-\\
-    {\mathsf{b}}^n
-&=
-    \tilde{{\mathsf{b}}}^n
-+ 
-    \mathrm{MLP}\big(
-    \mathrm{LN}\big(
-        \tilde{{\mathsf{b}}}^n
-    \big)
-    \big).
+\tilde{{\mathsf{b}}}^n = \bar{{\mathsf{b}}}^n + \mathrm{MHA}\big(\mathrm{LN}\big(\bar{{\mathsf{b}}}^1, \bar{{\mathsf{b}}}^2,\ldots,\bar{{\mathsf{b}}}^N \big)\big),\\
+{\mathsf{b}}^n =\tilde{{\mathsf{b}}}^n + \mathrm{MLP}\big(\mathrm{LN}\big(\tilde{{\mathsf{b}}}^n\big) \big).
 ```
 где $\mathrm{MHA}$ обозначает multi-head attention слой , $\mathrm{LN}$ обозначает слой нормализации , а $\mathrm{MLP}$ обозначает полносвязный слой с функцией активации $\mathrm{ReLU}$. 
 
