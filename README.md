@@ -31,30 +31,30 @@
 \end{align}
 ```
 ### Класс Encoder (состоит из EncoderMultiHeadAttention (2) и FeedForward(3))
-Множество из $N$ таких размещений $\bar{\bm{\mathsf{b}}}$
-($\lvert \bar{\bm{\mathsf{b}}} \rvert=d$) затем проходит через несколько  multi-head (с $M$ heads) self-attention слоев , каждый из которых содержит следующие операции.
+Множество из $N$ таких размещений $\bar{{\mathsf{b}}}$
+($\lvert \bar{{\mathsf{b}}} \rvert=d$) затем проходит через несколько  multi-head (с $M$ heads) self-attention слоев , каждый из которых содержит следующие операции.
 $$
-    \tilde{\bm{\mathsf{b}}}^n
+    \tilde{{\mathsf{b}}}^n
 &=
-    \bar{\bm{\mathsf{b}}}^n
+    \bar{{\mathsf{b}}}^n
 + 
     \mathrm{MHA}\big(
     \mathrm{LN}\big(
-            \bar{\bm{\mathsf{b}}}^1,
-            \bar{\bm{\mathsf{b}}}^2,
+            \bar{{\mathsf{b}}}^1,
+            \bar{{\mathsf{b}}}^2,
             \ldots,
-            \bar{\bm{\mathsf{b}}}^N
+            \bar{{\mathsf{b}}}^N
     \big)
     \big),
 
 \\
-    \bm{\mathsf{b}}^n
+    {\mathsf{b}}^n
 &=
-    \tilde{\bm{\mathsf{b}}}^n
+    \tilde{{\mathsf{b}}}^n
 + 
     \mathrm{MLP}\big(
     \mathrm{LN}\big(
-        \tilde{\bm{\mathsf{b}}}^n
+        \tilde{{\mathsf{b}}}^n
     \big)
     \big).
 $$
