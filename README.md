@@ -182,17 +182,15 @@ ${\mathsf{c}}_t$ ($\lvert {\mathsf{c}}_t \rvert=N$)
         \text{if} \hspace{2pt} n\notin \{s_{1:t-1}\},
 \\
         -\infty 
-        \text{иначе},
+        \text{  иначе},
     \end{cases}
-
 ```
 где логиты ограничены значениями между
 $[-C,C]$ следуя
 [Kool, W., van Hoof, H., and Welling, M. Attention, learn to solve routing problems!](https://arxiv.org/abs/1803.08475)
 так как это может способствовать исследованию и привести к повышению производительности.
 Наконец, стратегия последовательности получена с помощью
-$$
-
+```math
     \pi^{\mathrm{s}}
         \big(
             \cdot 
@@ -202,28 +200,23 @@ $$
         \big)
 =
     \mathrm{softmax}({\mathsf{c}}_t).
-
-
-$$
+```
 ### Функция sample_action
 Реализует выбор коробки и ее положение случайным образом по распределению  $f_{\mathcal{I}}^{\mathrm{s}}$ (4)  и $f_{\mathcal{I}}^{\mathrm{p}}$ (5)
 
 # Gradient Policy utils.py
 ### Функция compute_reinforce_with_baseline_loss
 реализует градиентную политику описанную {Williams, R. J. Simple statistical gradient-following algorithms for connectionist reinforcement learning.}. При заданном входном множестве $\mathcal{I}$, как агент последовательности $\pi^{\mathrm{s}}$ и агент размещения $\pi^{\mathrm{p}}$ сотрудничают, чтобы получить конфигурацию решения $\mathcal{C}{\pi}={s_1, p_1, s_2, p_2, \ldots, s_N, p_N}$, работая совместно на протяжении $N$ временных шагов ($\pi$ обозначает совокупность $\pi^{\mathrm{s}}$ и $\pi^{\mathrm{p}}$). Чтобы обучить эту систему таким образом, чтобы $\pi^{\mathrm{s}}$ и $\pi^{\mathrm{p}}$ могли сотрудничать для максимизации окончательной выгоды $r{\mathrm{u}}\in[0,1]$, что эквивалентно минимизации стоимости $c(\mathcal{C}{\pi})=1-r{\mathrm{u}}(\mathcal{C}_{\pi})$, определим общую функцию потерь как ожидаемую стоимость конфигураций, сгенерированных при использовании $\pi$:
-$$
-
+```math
     \mathcal{J}({\theta} \vert \mathcal{I})
 =
     \mathbb{E}_{\mathcal{C}_{\pi}\sim\pi_{{\theta}}}
     \left[
         c(\mathcal{C}_{\pi} \vert \mathcal{I})
     \right],
-
-$$
+```
 оптимизируемая следующей $\mathrm{REINFORCE}$ градиентной оценкой 
-$$
-
+```math
     &\nabla_{{\theta}}
     \mathcal{J}({\theta} \vert \mathcal{I})
 =
@@ -259,9 +252,7 @@ $$
         )
         \Big)
     \Big].
-
-
-$$
+```
 Для базовой функции (baseline function) $b(\mathcal{I})$ в указанном уравнении мы используем жадную базовую политику (greedy rollout baseline), предложенную в работе [Kool, W., van Hoof, H., and Welling, M. Attention, learn to solve routing problems!](https://arxiv.org/abs/1803.08475)
 
 
