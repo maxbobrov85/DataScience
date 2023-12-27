@@ -34,7 +34,9 @@
 Множество из $N$ таких размещений $\bar{{\mathsf{b}}}$
 ($\lvert \bar{{\mathsf{b}}} \rvert=d$) затем проходит через несколько  multi-head (с $M$ heads) self-attention слоев , каждый из которых содержит следующие операции.
 ```math
-\tilde{{\mathsf{b}}}^n = \bar{{\mathsf{b}}}^n + \mathrm{MHA}\big(\mathrm{LN}\big(\bar{{\mathsf{b}}}^1, \bar{{\mathsf{b}}}^2,\ldots,\bar{{\mathsf{b}}}^N \big)\big),\\
+\tilde{{\mathsf{b}}}^n = \bar{{\mathsf{b}}}^n + \mathrm{MHA}\big(\mathrm{LN}\big(\bar{{\mathsf{b}}}^1, \bar{{\mathsf{b}}}^2,\ldots,\bar{{\mathsf{b}}}^N \big)\big),
+```
+```math
 {\mathsf{b}}^n =\tilde{{\mathsf{b}}}^n + \mathrm{MLP}\big(\mathrm{LN}\big(\tilde{{\mathsf{b}}}^n\big) \big).
 ```
 где $\mathrm{MHA}$ обозначает multi-head attention слой , $\mathrm{LN}$ обозначает слой нормализации , а $\mathrm{MLP}$ обозначает полносвязный слой с функцией активации $\mathrm{ReLU}$. 
@@ -58,23 +60,23 @@ $\bm{\mathsf{f}_t}$.
 ## Класс PointerNet 
 Собрали все вместе и добавляем технику glympsy attention 
 ### Функция sequentional_embedding
+
 Определяет функцию кодирования $f_{\mathcal{I}}^{\mathrm{s}}$ (4) для  политики выбора следующей (sequence) и $f_{\mathcal{I}}^{\mathrm{p}}$ (5) размещения (placement) следующим образом:
-$$\bar{\bm{\mathsf{q}}}^{\mathrm{s}}_t
+```math\bar{{\mathsf{q}}}^{\mathrm{s}}_t
 =
-    f^{\mathrm{s}}_{\mathcal{I}}(s_{1:t-1}, p_{1:t-1}; \bm{\theta}^{\mathrm{e}})
+    f^{\mathrm{s}}_{\mathcal{I}}(s_{1:t-1}, p_{1:t-1}; {\theta}^{\mathrm{e}})
 =
     \big\langle
         \langle
             \mathcal{B}
                 \setminus{
-                    \bm{\mathsf{b}}^{s_{1:t-1}} 
+                   {\mathsf{b}}^{s_{1:t-1}} 
                 }
         \rangle,
-        \bm{\mathsf{f}}_{t}
+       {\mathsf{f}}_{t}
     \big\rangle,
 
-
-$$
+```
 $$\bm{\mathsf{q}}^{\mathrm{p}}_t
 =
     f^{\mathrm{p}}_{\mathcal{I}}(s_{1:t}, p_{1:t-1}; \bm{\theta}^{\mathrm{e}})
