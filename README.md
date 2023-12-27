@@ -46,14 +46,14 @@
 Для компенсации возможных наложений,
 на каждом шаге времени $t$
 мы объединяем последние две границы
-${\bm{\mathsf{F}}{t-1}, \bm{\mathsf{F}}{t}}$
-($\bm{\mathsf{F}}_{t}$
+${{\mathsf{F}}{t-1}, {\mathsf{F}}{t}}$
+(${\mathsf{F}}_{t}$
 обозначает границу перед упаковкой коробки
 $(l^{s_t}, w^{s_t}, h^{s_t})$
 в контейнер)
 и передаем их через сверточную сеть
 для получения векторного представления границы
-$\bm{\mathsf{f}_t}$.
+${\mathsf{f}_t}$.
 ### Класс PlacementDecoder
 Декодирование последовательности выбора положения коробки. Простой линейный слой.
 
@@ -66,7 +66,7 @@ $\bm{\mathsf{f}_t}$.
 \bar{{\mathsf{q}}}^{\mathrm{s}}_t=f^{\mathrm{s}}_{\mathcal{I}}(s_{1:t-1}, p_{1:t-1}; {\theta}^{\mathrm{e}})=\big\langle\langle\mathcal{B}\setminus{{\mathsf{b}}^{s_{1:t-1}} }\rangle,{\mathsf{f}}_{t}\big\rangle,
 ```
 ```math
-\bm{\mathsf{q}}^{\mathrm{p}}_t=f^{\mathrm{p}}_{\mathcal{I}}(s_{1:t}, p_{1:t-1}; {\theta}^{\mathrm{e}})=\big\langle{\mathsf{b}}^{s_t}, \langle\mathcal{B}\setminus{{\mathsf{b}}^{s_{1:t}} }\rangle,{\mathsf{f}}_{t}\big\rangle.
+{\mathsf{q}}^{\mathrm{p}}_t=f^{\mathrm{p}}_{\mathcal{I}}(s_{1:t}, p_{1:t-1}; {\theta}^{\mathrm{e}})=\big\langle{\mathsf{b}}^{s_t}, \langle\mathcal{B}\setminus{{\mathsf{b}}^{s_{1:t}} }\rangle,{\mathsf{f}}_{t}\big\rangle.
 ```
 где
 $\langle\rangle$
@@ -76,7 +76,7 @@ $\langle\rangle$
 также $d$-мерный.
 Эта функция кодирования генерирует
 вектор запроса
-$\bar{\bm{\mathsf{q}}}^{\mathrm{s}}_t$
+$\bar{{\mathsf{q}}}^{\mathrm{s}}_t$
 для декодирования последовательности размещения.
 ### Функция seqPolicy
 Реализует декодирование последовательности выбора следующей коробки. В соответствии с [Bello, I., Pham, H., Le, Q. V., Norouzi, M., and Bengio, S. Neural combinatorial optimization with reinforcement
@@ -92,53 +92,49 @@ is all you need.](https://arxiv.org/abs/1706.03762)
 что, как показано, приводит к повышению производительности.
 В начале каждого эпизода,
 из каждого представления размещения
-$\bm{\mathsf{b}}^n$
+${\mathsf{b}}^n$
 получаются $M$ множеств фиксированных контекстных векторов
 с помощью обучаемых линейных проекций.
 Где $h=\frac{d}{M}$,
 контекстные векторы
-$\bar{\bm{\mathsf{k}}}^{n,m}$ (обзорный ключ размером $h$) и
-$\bar{\bm{\mathsf{v}}}^{n,m}$ (обзорное значение размером $h$)
+$\bar{{\mathsf{k}}}^{n,m}$ (обзорный ключ размером $h$) и
+$\bar{{\mathsf{v}}}^{n,m}$ (обзорное значение размером $h$)
 для $m^{\mathrm{th}}$ head,
 а также
-$\bm{\mathsf{k}}^{n}$ (ключ логита размером $d$),
+${\mathsf{k}}^{n}$ (ключ логита размером $d$),
 общий для всех $M$ head,
 получаются с помощью
-$$
-
-    \bar{\bm{\mathsf{k}}}^{n,m}
+```math
+    \bar{{\mathsf{k}}}^{n,m}
 =
-    \bm{\mathsf{W}}^{\bar{\bm{\mathsf{k}}},m}
-    \bm{\mathsf{b}}^n,
+    {\mathsf{W}}^{\bar{{\mathsf{k}}},m}
+    {\mathsf{b}}^n,
 \hspace{5pt}
 % \\
-    \bar{\bm{\mathsf{v}}}^{n,m}
+    \bar{{\mathsf{v}}}^{n,m}
 =
-    \bm{\mathsf{W}}^{\bar{\bm{\mathsf{v}}},m}
-    \bm{\mathsf{b}}^n,
+    {\mathsf{W}}^{\bar{{\mathsf{v}}},m}
+    {\mathsf{b}}^n,
 \hspace{5pt}
     % \\
-    \bm{\mathsf{k}}^{n}
+    {\mathsf{k}}^{n}
 =
-    \bm{\mathsf{W}}^{\bm{\mathsf{k}}}
-    \bm{\mathsf{b}}^n,
-
-
-$$ 
-где $\bm{\mathsf{W}}^{\bar{\bm{\mathsf{k}}},m}, \bm{\mathsf{W}}^{\bar{\bm{\mathsf{v}}},m} \in\mathbb{R}^{h\times d}$ и $\bm{\mathsf{W}}^{\bm{\mathsf{k}}}in\mathbb{R}^{d\times d}$. Вектор запроса последовательности $\bar{\bm{\mathsf{q}}}^{\mathrm{s}}_t$ is split into $M$ векторы запроса для обзора, каждый размерностью
-$\lvert \bar{\bm{\mathsf{q}}}^{\mathrm{s},m}_t \rvert=h$.
+    {\mathsf{W}}^{{\mathsf{k}}}
+    {\mathsf{b}}^n,
+```
+где ${\mathsf{W}}^{\bar{{\mathsf{k}}},m}, {\mathsf{W}}^{\bar{{\mathsf{v}}},m} \in\mathbb{R}^{h\times d}$ и ${\mathsf{W}}^{{\mathsf{k}}}in\mathbb{R}^{d\times d}$. Вектор запроса последовательности $\bar{{\mathsf{q}}}^{\mathrm{s}}_t$ is split into $M$ векторы запроса для обзора, каждый размерностью
+$\lvert \bar{{\mathsf{q}}}^{\mathrm{s},m}_t \rvert=h$.
 Совмещенный вектор 
-$\bar{\bm{\mathsf{c}}}^m_t$ 
-($\lvert \bar{\bm{\mathsf{c}}}^m_t \rvert=N$) 
+$\bar{{\mathsf{c}}}^m_t$ 
+($\lvert \bar{{\mathsf{c}}}^m_t \rvert=N$) 
 вычисляется следующим образом
-$$
-
-    \bar{\bm{\mathsf{c}}}^m_{t,n}
+```math
+    \bar{{\mathsf{c}}}^m_{t,n}
 =
     \begin{cases}
         \frac{
-                {\bar{\bm{\mathsf{q}}}_t^{{\mathrm{s},m}^{\top}}} 
-                \bar{\bm{\mathsf{k}}}^{n,m}
+                {\bar{{\mathsf{q}}}_t^{{\mathrm{s},m}^{\top}}} 
+                \bar{{\mathsf{k}}}^{n,m}
              }
              {\sqrt{h}} 
 & 
@@ -149,41 +145,39 @@ $$
         \text{иначе}.
     \end{cases}
 
-$$
+```
 Далее получаем обновленный запрос последовательности для $m^{\mathrm{th}}$ head взвешенной суммой векторов значений обзора
-$$
-
-    \bm{\mathsf{q}}^{\mathrm{s},m}_t
+```math
+    {\mathsf{q}}^{\mathrm{s},m}_t
 &=
     \sum_{n=1}^N
-    \mathrm{softmax} (\bar{\bm{\mathsf{c}}}^m_{t})_{n}
+    \mathrm{softmax} (\bar{{\mathsf{c}}}^m_{t})_{n}
     \cdot
-    \bar{\bm{\mathsf{v}}}^{n,m}.
-
-$$
+    \bar{{\mathsf{v}}}^{n,m}.
+```
 Объединяя обновленные векторы запроса последовательности из всех $M$ heads, мы получаем
 
-$\bm{\mathsf{q}}^{\mathrm{s}}_t$
-($\lvert \bm{\mathsf{q}}^{\mathrm{s}}_t \rvert=d$).
+${\mathsf{q}}^{\mathrm{s}}_t$
+($\lvert {\mathsf{q}}^{\mathrm{s}}_t \rvert=d$).
 Применив еще одну линейную проекцию, мы получаем
 
-$\bm{\mathsf{W}}^{\bm{\mathsf{q}}}
+${\mathsf{W}}^{{\mathsf{q}}}
 \in
 \mathbb{R}^{d\times d}$,
 обновленный совмещенный вектор 
-$\bm{\mathsf{c}}_t$ ($\lvert \bm{\mathsf{c}}_t \rvert=N$) 
+${\mathsf{c}}_t$ ($\lvert {\mathsf{c}}_t \rvert=N$) 
 вычисляется как
 $$
 
-    \bm{\mathsf{c}}_{t,n}
+    {\mathsf{c}}_{t,n}
 =
     \begin{cases}
         C \cdot \mathrm{tanh} 
         \Big( 
         \frac{
-                (\bm{\mathsf{W}}^{\bm{\mathsf{q}}}
-                 \bm{\mathsf{q}}^{\mathrm{s}}_t)^{\top}
-                \bm{\mathsf{k}}^{n}
+                ({\mathsf{W}}^{{\mathsf{q}}}
+                 {\mathsf{q}}^{\mathrm{s}}_t)^{\top}
+                {\mathsf{k}}^{n}
              }
              {\sqrt{d}} 
         \Big)
@@ -207,11 +201,11 @@ $$
         \big(
             \cdot 
             \big\vert 
-            f^{\mathrm{s}}_{\mathcal{I}}(s_{1:t-1}, p_{1:t-1}; \bm{\theta}^{\mathrm{e}}); 
-            \bm{\theta}^{\mathrm{s}}
+            f^{\mathrm{s}}_{\mathcal{I}}(s_{1:t-1}, p_{1:t-1}; {\theta}^{\mathrm{e}}); 
+            {\theta}^{\mathrm{s}}
         \big)
 =
-    \mathrm{softmax}(\bm{\mathsf{c}}_t).
+    \mathrm{softmax}({\mathsf{c}}_t).
 
 
 $$
@@ -223,9 +217,9 @@ $$
 реализует градиентную политику описанную {Williams, R. J. Simple statistical gradient-following algorithms for connectionist reinforcement learning.}. При заданном входном множестве $\mathcal{I}$, как агент последовательности $\pi^{\mathrm{s}}$ и агент размещения $\pi^{\mathrm{p}}$ сотрудничают, чтобы получить конфигурацию решения $\mathcal{C}{\pi}={s_1, p_1, s_2, p_2, \ldots, s_N, p_N}$, работая совместно на протяжении $N$ временных шагов ($\pi$ обозначает совокупность $\pi^{\mathrm{s}}$ и $\pi^{\mathrm{p}}$). Чтобы обучить эту систему таким образом, чтобы $\pi^{\mathrm{s}}$ и $\pi^{\mathrm{p}}$ могли сотрудничать для максимизации окончательной выгоды $r{\mathrm{u}}\in[0,1]$, что эквивалентно минимизации стоимости $c(\mathcal{C}{\pi})=1-r{\mathrm{u}}(\mathcal{C}_{\pi})$, определим общую функцию потерь как ожидаемую стоимость конфигураций, сгенерированных при использовании $\pi$:
 $$
 
-    \mathcal{J}(\bm{\theta} \vert \mathcal{I})
+    \mathcal{J}({\theta} \vert \mathcal{I})
 =
-    \mathbb{E}_{\mathcal{C}_{\pi}\sim\pi_{\bm{\theta}}}
+    \mathbb{E}_{\mathcal{C}_{\pi}\sim\pi_{{\theta}}}
     \left[
         c(\mathcal{C}_{\pi} \vert \mathcal{I})
     \right],
@@ -234,10 +228,10 @@ $$
 оптимизируемая следующей $\mathrm{REINFORCE}$ градиентной оценкой 
 $$
 
-    &\nabla_{\bm{\theta}}
-    \mathcal{J}(\bm{\theta} \vert \mathcal{I})
+    &\nabla_{{\theta}}
+    \mathcal{J}({\theta} \vert \mathcal{I})
 =
-    \mathbb{E}_{\mathcal{C}_{\pi}\sim\pi_{\bm{\theta}}}
+    \mathbb{E}_{\mathcal{C}_{\pi}\sim\pi_{{\theta}}}
     \Big[
         \Big(
             c(\mathcal{C}_{\pi} \vert \mathcal{I})
@@ -249,22 +243,22 @@ $$
     \sum_{t=1}^{N}
         \Big(
        
-        \nabla_{\bm{\theta}^{\mathrm{e},\mathrm{s}}}
+        \nabla_{{\theta}^{\mathrm{e},\mathrm{s}}}
         \log \pi^{\mathrm{s}} 
         (
             s_t; 
             
-            \bm{\theta}^{\mathrm{e},\mathrm{s}}
+            {\theta}^{\mathrm{e},\mathrm{s}}
             
         )
         +    
         
-        \nabla_{\bm{\theta}^{\mathrm{e},\mathrm{p}}}
+        \nabla_{{\theta}^{\mathrm{e},\mathrm{p}}}
         \log \pi^{\mathrm{p}}
         (
             p_t; 
             
-            \bm{\theta}^{\mathrm{e},\mathrm{p}}
+            {\theta}^{\mathrm{e},\mathrm{p}}
             
         )
         \Big)
