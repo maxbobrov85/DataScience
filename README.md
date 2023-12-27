@@ -62,36 +62,12 @@ $\bm{\mathsf{f}_t}$.
 ### Функция sequentional_embedding
 
 Определяет функцию кодирования $f_{\mathcal{I}}^{\mathrm{s}}$ (4) для  политики выбора следующей (sequence) и $f_{\mathcal{I}}^{\mathrm{p}}$ (5) размещения (placement) следующим образом:
-```math\bar{{\mathsf{q}}}^{\mathrm{s}}_t
-=
-    f^{\mathrm{s}}_{\mathcal{I}}(s_{1:t-1}, p_{1:t-1}; {\theta}^{\mathrm{e}})
-=
-    \big\langle
-        \langle
-            \mathcal{B}
-                \setminus{
-                   {\mathsf{b}}^{s_{1:t-1}} 
-                }
-        \rangle,
-       {\mathsf{f}}_{t}
-    \big\rangle,
-
+```math
+\bar{{\mathsf{q}}}^{\mathrm{s}}_t=f^{\mathrm{s}}_{\mathcal{I}}(s_{1:t-1}, p_{1:t-1}; {\theta}^{\mathrm{e}})=\big\langle\langle\mathcal{B}\setminus{{\mathsf{b}}^{s_{1:t-1}} }\rangle,{\mathsf{f}}_{t}\big\rangle,
 ```
-$$\bm{\mathsf{q}}^{\mathrm{p}}_t
-=
-    f^{\mathrm{p}}_{\mathcal{I}}(s_{1:t}, p_{1:t-1}; \bm{\theta}^{\mathrm{e}})
-=
-    \big\langle
-        \bm{\mathsf{b}}^{s_t}, 
-        \langle
-            \mathcal{B}
-            \setminus{
-                \bm{\mathsf{b}}^{s_{1:t}} 
-            }
-        \rangle,
-        \bm{\mathsf{f}}_{t}
-    \big\rangle.
-$$
+```math
+\bm{\mathsf{q}}^{\mathrm{p}}_t=f^{\mathrm{p}}_{\mathcal{I}}(s_{1:t}, p_{1:t-1}; {\theta}^{\mathrm{e}})=\big\langle{\mathsf{b}}^{s_t}, \langle\mathcal{B}\setminus{{\mathsf{b}}^{s_{1:t}} }\rangle,{\mathsf{f}}_{t}\big\rangle.
+```
 где
 $\langle\rangle$
 представляет операцию, которая принимает на вход
